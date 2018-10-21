@@ -60,15 +60,20 @@ library(ggplot2)
 ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange") +
   xlab("Período do Ano") + ylab("Temperaturas Registradas (°F)") + ggtitle("Série Temporal de Temperaturas °F")
 
-### LIMITES DE CONTROLE
+## LIMITES DE CONTROLE
 # Para limites de controle utilizaremos a biblioteca qcc
 #Carregamos a biblioteca
 library(qcc)
+#Criamos a variável com os graus em fahrenheint
 fahrenheint = airquality$Temp
+#Cramos o gráfico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
+#Obtemos as medidas resumo
 summary(controle_fahrenheint)
 #Convertemos Fahrenheit para Celcius
 airquality$Temp = (airquality$Temp-32) * (5/9)
 celcius = airquality$Temp
+#Cramos o gráfico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 controle_celcius = qcc(celcius, type="xbar.one")
+#Obtemos as medidas resumo
 summary(controle_celcius)
