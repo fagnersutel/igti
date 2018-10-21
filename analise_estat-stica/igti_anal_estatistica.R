@@ -59,3 +59,16 @@ library(ggplot2)
 #Plotamos uma série temporal da temperatura
 ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange") +
   xlab("Período do Ano") + ylab("Temperaturas Registradas (°F)") + ggtitle("Série Temporal de Temperaturas °F")
+
+### LIMITES DE CONTROLE
+# Para limites de controle utilizaremos a biblioteca qcc
+#Carregamos a biblioteca
+library(qcc)
+fahrenheint = airquality$Temp
+controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
+summary(controle_fahrenheint)
+#Convertemos Fahrenheit para Celcius
+airquality$Temp = (airquality$Temp-32) * (5/9)
+celcius = airquality$Temp
+controle_celcius = qcc(celcius, type="xbar.one")
+summary(controle_celcius)
