@@ -39,18 +39,23 @@ summary(modelo_lm)$adj.r.squared
 ## Exercício 2
 #Para o exercício 2 utilizaremos a mesma base utilizando os dados Temperatura e Mes
 #Criamos o histograma de Temperatura
-histograma <- hist(airquality$Temp, freq=FALSE, col="orange")
+histograma <- hist(airquality$Temp, freq=FALSE, col="orange", xlab = "Temperatura", ylab = "densidade", main = "Histograma de temperaturas")
 #Calculamosa densidade
 densidade <- density(airquality$Temp)
-densidade
 #Plotamos a linha de densodade
 lines(densidade, col=4, lwd=4)
 #Plotamos uma curva normal para a mesma média e desvio padrão
 lines(seq(40, 110, by=.5), dnorm(seq(40, 110, by=.5), mean(airquality$Temp), sd(airquality$Temp)), col="red", lwd=4)
+#Plotamosd as legendas
+legend(55, 0.04, legend=c("Curva Normal", "Curva Densidade"),
+       col=c("red", "blue"), lty=1, cex=1)
+box()
+
+
+
 #Criamos uma variavél de valendário em formato americano, vamos simular que se trata do ano de 2018
 airquality$calendario = as.Date(paste("2018", airquality$Month, airquality$Day, sep = "-"))
-text(locator(), labels = c("red line", "black line)"))
-box()
+
 
 library(ggplot2)
 ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange")
