@@ -49,13 +49,13 @@ lines(seq(40, 110, by=.5), dnorm(seq(40, 110, by=.5), mean(airquality$Temp), sd(
 #Plotamosd as legendas
 legend(55, 0.04, legend=c("Curva Normal", "Curva Densidade"),
        col=c("red", "blue"), lty=1, cex=1)
+#criamos uma borda
 box()
-
-
 
 #Criamos uma variavél de valendário em formato americano, vamos simular que se trata do ano de 2018
 airquality$calendario = as.Date(paste("2018", airquality$Month, airquality$Day, sep = "-"))
-
-
+#Carregamosa bibliotega ggplot para gráficos mais custoimizados
 library(ggplot2)
-ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange")
+#Plotamos uma série temporal da temperatura
+ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange") +
+  xlab("Período do Ano") + ylab("Temperaturas Registradas (°F)") + ggtitle("Série Temporal de Temperaturas °F")
