@@ -35,3 +35,22 @@ predict(modelo_lm, newdata = radiacao)
 
 #obtemos o coefiente de determinacao R2, ou R ajustado, que nos diz que o modelo explica apenas 6% da variaçao
 summary(modelo_lm)$adj.r.squared
+
+## Exercício 2
+#Para o exercício 2 utilizaremos a mesma base utilizando os dados Temperatura e Mes
+#Criamos o histograma de Temperatura
+histograma <- hist(airquality$Temp, freq=FALSE, col="orange")
+#Calculamosa densidade
+densidade <- density(airquality$Temp)
+densidade
+#Plotamos a linha de densodade
+lines(densidade, col=4, lwd=4)
+#Plotamos uma curva normal para a mesma média e desvio padrão
+lines(seq(40, 110, by=.5), dnorm(seq(40, 110, by=.5), mean(airquality$Temp), sd(airquality$Temp)), col="red", lwd=4)
+#Criamos uma variavél de valendário em formato americano, vamos simular que se trata do ano de 2018
+airquality$calendario = as.Date(paste("2018", airquality$Month, airquality$Day, sep = "-"))
+text(locator(), labels = c("red line", "black line)"))
+box()
+
+library(ggplot2)
+ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange")
