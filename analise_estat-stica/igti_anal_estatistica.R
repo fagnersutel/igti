@@ -6,9 +6,10 @@ data(airquality)
 head(airquality)
 #nos certificamos de que há mais de 100 registros
 dim(airquality)
-
 #como os dados são built-in vamos exportar para uma tabela
 write.csv(airquality, "meusdados.csv", row.names=FALSE)
+#verificamos a existencia do CSV
+list.files()
 #removemos o bando original
 rm(airquality)
 #realizamos a carga de dados
