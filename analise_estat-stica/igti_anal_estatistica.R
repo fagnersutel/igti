@@ -71,24 +71,28 @@ stats.xbar.one(airquality$Temp, 8)
 #R range
 temperaturas <- matrix(unlist(airquality$Temp), ncol = 9, byrow = TRUE)
 temperaturas
-q <- qcc(temperaturas, type="R", nsigmas=3)
+q <- qcc(temperaturas, type="R")
 
 
 #Criamos a variável com os graus em fahrenheint
-fahrenheint = airquality$Temp
+fahrenheint = temperaturas
 #Criamos o gráfico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
 controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
 #Obtemos as medidas resumo
 summary(controle_fahrenheint)
 #Convertemos Fahrenheit para Celcius
-airquality$Temp = (airquality$Temp-32) * (5/9)
-celcius = airquality$Temp
+temperaturas = (temperaturas-32) * (5/9)
+celcius = temperaturas
 #Cramos o gráfico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
 controle_celcius = qcc(celcius, type="xbar.one")
 #Obtemos as medidas resumo
 summary(controle_celcius)
+
+############# ** FINAL ** #############
+
+
 #X_bar
 plot.xbar = qcc(temperaturas, type="xbar")
 #R
