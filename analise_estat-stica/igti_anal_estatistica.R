@@ -1,12 +1,12 @@
-## Exerc√≠cio 1
+## ExercÌcio 1
 
 #realizamos a carga de dados
 data(airquality)
 #verificamos os promeiros dados
 head(airquality)
-#nos certificamos de que h√° mais de 100 registros
+#nos certificamos de que h· mais de 100 registros
 dim(airquality)
-#como os dados s√£o built-in vamos exportar para uma tabela
+#como os dados s„o built-in vamos exportar para uma tabela
 write.csv(airquality, "meusdados.csv", row.names=FALSE)
 #verificamos a existencia do CSV
 list.files()
@@ -16,9 +16,9 @@ rm(airquality)
 airquality = read.csv("meusdados.csv", header = TRUE, sep = ",")
 #Plotamos os dados na ordem plot(eixo_x, eixo_y), com pontos perder e solidos => pch=16
 plot(airquality$Solar.R, airquality$Temp, col="green", pch=16)
-#ploramos a linha de regress√£o linear em vermelho
+#ploramos a linha de regress„o linear em vermelho
 abline(lm(airquality$Temp~airquality$Solar.R), col="red")
-#Armazenamos o modelo de regress√£o linear
+#Armazenamos o modelo de regress„o linear
 modelo_lm <- lm(Temp ~ Solar.R, data = airquality)
 #imprimimos o modelo com o intercepto e coeficente angular
 modelo_lm
@@ -30,21 +30,21 @@ options(scipen = 999)
 summary(modelo_lm)
 #criamos tres novos valores de radiacao solar
 radiacao <- data.frame(Solar.R = c(184, 242, 168))
-#Como Lm √© nativo do R utilizamnos predict para restgatar o modelo e predizer a tamperatira frente aos tres valores de radiacao
+#Como Lm È nativo do R utilizamnos predict para restgatar o modelo e predizer a tamperatira frente aos tres valores de radiacao
 predict(modelo_lm, newdata = radiacao)
 
-#obtemos o coefiente de determinacao R2, ou R ajustado, que nos diz que o modelo explica apenas 6% da varia√ßao
+#obtemos o coefiente de determinacao R2, ou R ajustado, que nos diz que o modelo explica apenas 6% da variaÁao
 summary(modelo_lm)$adj.r.squared
 
-## Exerc√≠cio 2
-#Para o exerc√≠cio 2 utilizaremos a mesma base utilizando os dados Temperatura e Mes
+## ExercÌcio 2
+#Para o exercÌcio 2 utilizaremos a mesma base utilizando os dados Temperatura e Mes
 #Criamos o histograma de Temperatura
 histograma <- hist(airquality$Temp, freq=FALSE, col="orange", xlab = "Temperatura", ylab = "densidade", main = "Histograma de temperaturas")
 #Calculamosa densidade
 densidade <- density(airquality$Temp)
 #Plotamos a linha de densodade
 lines(densidade, col=4, lwd=4)
-#Plotamos uma curva normal para a mesma m√©dia e desvio padr√£o
+#Plotamos uma curva normal para a mesma mÈdia e desvio padr„o
 lines(seq(40, 110, by=.5), dnorm(seq(40, 110, by=.5), mean(airquality$Temp), sd(airquality$Temp)), col="red", lwd=4)
 #Plotamosd as legendas
 legend(55, 0.04, legend=c("Curva Normal", "Curva Densidade"),
@@ -52,27 +52,30 @@ legend(55, 0.04, legend=c("Curva Normal", "Curva Densidade"),
 #criamos uma borda
 box()
 
-#Criamos uma variav√©l de valend√°rio em formato americano, vamos simular que se trata do ano de 2018
+#Criamos uma variavÈl de valend·rio em formato americano, vamos simular que se trata do ano de 2018
 airquality$calendario = as.Date(paste("2018", airquality$Month, airquality$Day, sep = "-"))
-#Carregamosa bibliotega ggplot para gr√°ficos mais custoimizados
+#Carregamosa bibliotega ggplot para gr·ficos mais custoimizados
 library(ggplot2)
-#Plotamos uma s√©rie temporal da temperatura
+#Plotamos uma sÈrie temporal da temperatura
 ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange") +
-  xlab("Per√≠odo do Ano") + ylab("Temperaturas Registradas (¬∞F)") + ggtitle("S√©rie Temporal de Temperaturas ¬∞F")
+  xlab("PerÌodo do Ano") + ylab("Temperaturas Registradas (∞F)") + ggtitle("SÈrie Temporal de Temperaturas ∞F")
 
+
+
+## LIMITES DE CONTROLE
+# Para limites de controle utilizaremos a biblioteca qcc
+#Carregamos a biblioteca
+library(qcc)
 #R range
 stats.xbar.one(airquality$Temp, 8)
 temperaturas <- matrix(unlist(airquality$Temp), ncol = 9, byrow = TRUE)
 temperaturas
 q <- qcc(temperaturas, type="R", nsigmas=3)
 
-## LIMITES DE CONTROLE
-# Para limites de controle utilizaremos a biblioteca qcc
-#Carregamos a biblioteca
-library(qcc)
-#Criamos a vari√°vel com os graus em fahrenheint
+
+#Criamos a vari·vel com os graus em fahrenheint
 fahrenheint = airquality$Temp
-#Criamos o gr√°fico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
+#Criamos o gr·fico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
 controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
 #Obtemos as medidas resumo
@@ -80,8 +83,9 @@ summary(controle_fahrenheint)
 #Convertemos Fahrenheit para Celcius
 airquality$Temp = (airquality$Temp-32) * (5/9)
 celcius = airquality$Temp
-#Cramos o gr√°fico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
+#Cramos o gr·fico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
 controle_celcius = qcc(celcius, type="xbar.one")
 #Obtemos as medidas resumo
 summary(controle_celcius)
+
