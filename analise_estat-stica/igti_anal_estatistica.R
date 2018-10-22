@@ -78,7 +78,7 @@ q <- qcc(temperaturas, type="R", nsigmas=3)
 fahrenheint = airquality$Temp
 #Criamos o gráfico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
-controle_fahrenheint = qcc(fahrenheint, type="xbar.one", nsigmas=9)
+controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
 #Obtemos as medidas resumo
 summary(controle_fahrenheint)
 #Convertemos Fahrenheit para Celcius
@@ -86,7 +86,7 @@ airquality$Temp = (airquality$Temp-32) * (5/9)
 celcius = airquality$Temp
 #Cramos o gráfico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
-controle_celcius = qcc(celcius, type="xbar.one", nsigmas=9)
+controle_celcius = qcc(celcius, type="xbar.one")
 #Obtemos as medidas resumo
 summary(controle_celcius)
 
