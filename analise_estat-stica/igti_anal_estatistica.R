@@ -97,3 +97,5 @@ summary(controle_celcius)
 plot.xbar = qcc(temperaturas, type="xbar")
 #R
 plot.R = qcc(temperaturas, type="R")
+ #parâmetros de capabilidade
+process.capability(object = plot.xbar,spec.limits=c(22,29))
