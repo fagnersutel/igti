@@ -66,8 +66,9 @@ ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + ge
 # Para limites de controle utilizaremos a biblioteca qcc
 #Carregamos a biblioteca
 library(qcc)
-#R range
+X_range
 stats.xbar.one(airquality$Temp, 8)
+#R range
 temperaturas <- matrix(unlist(airquality$Temp), ncol = 9, byrow = TRUE)
 temperaturas
 q <- qcc(temperaturas, type="R", nsigmas=3)
@@ -77,7 +78,7 @@ q <- qcc(temperaturas, type="R", nsigmas=3)
 fahrenheint = airquality$Temp
 #Criamos o gráfico de controle de qualidade de graus fahrenheint com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
-controle_fahrenheint = qcc(fahrenheint, type="xbar.one")
+controle_fahrenheint = qcc(fahrenheint, type="xbar.one", nsigmas=9)
 #Obtemos as medidas resumo
 summary(controle_fahrenheint)
 #Convertemos Fahrenheit para Celcius
@@ -85,7 +86,7 @@ airquality$Temp = (airquality$Temp-32) * (5/9)
 celcius = airquality$Temp
 #Cramos o gráfico de controle de qualidade de graus Celcius com limite inferior (LCL), limite superior(UCL) e linha central (CL)
 #X_bar
-controle_celcius = qcc(celcius, type="xbar.one")
+controle_celcius = qcc(celcius, type="xbar.one", nsigmas=9)
 #Obtemos as medidas resumo
 summary(controle_celcius)
 
