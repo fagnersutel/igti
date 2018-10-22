@@ -60,6 +60,9 @@ library(ggplot2)
 ggplot(airquality, aes(x= calendario, y = Temp)) + geom_line(color = "red") + geom_point(color="orange") +
   xlab("Período do Ano") + ylab("Temperaturas Registradas (°F)") + ggtitle("Série Temporal de Temperaturas °F")
 
+#X_bar
+stats.xbar.one(airquality$Temp, 8)
+
 ## LIMITES DE CONTROLE
 # Para limites de controle utilizaremos a biblioteca qcc
 #Carregamos a biblioteca
