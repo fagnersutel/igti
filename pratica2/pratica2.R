@@ -34,9 +34,9 @@ prod[2:153] - prod[1:152]
 sum((prod[2:153] - prod[1:152])^2)
 um = sum((prod[2:153] - prod[1:152])^2)
 um
-dois = (1/(2*(length(prod)-1)))
+dois = (um/(2*(length(prod)-1)))
 dois
-medias_sucessivas =  sqrt(um * dois)
+medias_sucessivas =  sqrt(dois)
 medias_sucessivas
 #Variavel explicativa candidata 1 "Concentracao de Ozonio"
 cor.test(airquality$Temp, airquality$Ozone,method = "pearson")
