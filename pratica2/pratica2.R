@@ -32,11 +32,11 @@ variabilidade_capaz
 prod[2:153] - prod[1:152]
 (prod[2:153] - prod[1:152])^2
 sum((prod[2:153] - prod[1:152])^2)
-um = sum((prod[2:153] - prod[1:152])^2)
-um
-dois = (um/(2*(length(prod)-1)))
-dois
-medias_sucessivas =  sqrt(dois)
+passo_um = sum((prod[2:153] - prod[1:152])^2)
+passo_um
+passo_dois = (passo_um/(2*(length(prod)-1)))
+passo_dois
+medias_sucessivas =  sqrt(passo_dois)
 medias_sucessivas
 #Variavel explicativa candidata 1 "Concentracao de Ozonio"
 cor.test(airquality$Temp, airquality$Ozone,method = "pearson")
