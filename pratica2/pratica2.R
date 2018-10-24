@@ -49,3 +49,13 @@ cor.test(airquality$Temp, airquality$Ozone + airquality$Month,method = "pearson"
 #Variaveis explicativas candidatas pouco relevantes
 cor.test(airquality$Temp, airquality$Ozone + airquality$Month + airquality$Solar.R,method = "pearson")
 
+
+
+library(qcc)
+airquality <- matrix(unlist(airquality$Temp), ncol = 9, byrow = TRUE)
+obj <- qcc(airquality, type="xbar")
+q <- qcc(airquality, type="R")
+obj <- qcc(airquality, type="xbar")
+obj <- qcc(airquality[c(4:9),], type="xbar")
+obj <- qcc(airquality[c(4:9),], type="xbar",newdata=airquality[1:3,])
+obj <- qcc(airquality[c(4:9, 13, 15),], type="xbar",newdata=airquality[c(1:3,10:12 ),])
